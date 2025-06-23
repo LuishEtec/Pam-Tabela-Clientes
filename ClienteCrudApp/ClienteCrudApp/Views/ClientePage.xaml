@@ -1,0 +1,28 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ClienteCrudApp.ViewModels"
+             x:Class="ClienteCrudApp.Views.ClientePage">
+
+    <ContentPage.BindingContext>
+        <viewModels:ClientesViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="10">
+        <Button Text="Atualizar Lista" Command="{Binding CarregarClientesCommand}" />
+
+        <CollectionView ItemsSource="{Binding Clientes}" SelectionMode="Single" SelectedItem="{Binding ClienteSelecionado}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="5">
+                        <Label Text="{Binding NomeCliente}" FontAttributes="Bold" />
+                        <Label Text="{Binding EmailCliente}" FontSize="12"/>
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Button Text="Editar" Command="{Binding BindingContext.AtualizarClienteCommand, Source={x:Reference Name=ClientesPage}}" />
+                            <Button Text="Excluir" Command="{Binding BindingContext.DeletarClienteCommand, Source={x:Reference Name=ClientesPage}}" />
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
